@@ -31,7 +31,7 @@ You can specify variable parameters by adding following prefix to the parameters
 |@|ir-models|@models == IR models in the \'models\' dir => [\'resnet.xml\', \'googlenet.xml\', ...]|
 
 ### Examples of command line  
-`python auto_benchmark_app.py -cdir cache -m resnet.xml -nthreads $1,6,2 -nstreams %1,2,4,8 -d %CPU,GPU`
+`python auto_benchmark_app.py -cdir cache -m resnet.xml -nthreads $1,6,2 -nstreams %1,2,4,8 -d %CPU,GPU`  
 `python auto_benchmark_app.py -m @models -niter 100 -nthreads %1,2,4,8 -nstreams %1,2 -d %CPU -cdir cache`
 
 ### Example of a result file  
