@@ -35,7 +35,7 @@ You can specify variable parameters by adding following prefix to the parameters
 
 ### Examples of command line  
 `python auto_benchmark_app.py -cdir cache -m resnet.xml -nthreads $1,6,2 -nstreams %1,2,4,8 -d %CPU,GPU`  
-`python auto_benchmark_app.py -m @models -niter 100 -nthreads %1,2,4,8 -nstreams %1,2 -d %CPU -cdir cache`
+`python auto_benchmark_app.py -m @models -niter 100 -nthreads %1,2,4,8 -nstreams %1,2 -d CPU -cdir cache`
 
 ### Example of a result file  
 The last 4 items in each line are the performance data in the order of 'count', 'duration (ms)', 'latency AVG (ms)', and 'throughput (fps)'.  
