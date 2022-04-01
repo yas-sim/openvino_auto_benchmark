@@ -1,12 +1,12 @@
 # Semi-automated OpenVINO benchmark_app with variable parameters  
 
 ## Description  
-This program allows the users to specify variable parameters in the OpenVINO benchmark_app, and run benchmark with all combinations of the given parameters automatically.  
-The program will generate the report file in the CSV format with coded date and time file name ('`result_DDmm-HHMMSS.csv`'). You can analyze or visualize the benchmark result with MS Excel or same kind of spread sheet applications.  
+This program allows the users to specify variable parameters in the OpenVINO benchmark_app and run the benchmark with all combinations of the given parameters automatically.  
+The program will generate the report file in the CSV format with coded date and time file name ('`result_DDmm-HHMMSS.csv`'). You can analyze or visualize the benchmark result with MS Excel or a spreadsheet application.  
 
-**The program is just a kind of front-end for the OpenVINO official benchmark_app.**  
-This program is utilizing the benchmark_app as the benchmark core logic. So the performance result measured by this progam must be consistent with the one measured by the benchmark_app.  
-Also, the command line parameters and its meaning are totally compatible with the benchmark_app.  
+**The program is just a front-end for the OpenVINO official benchmark_app.**  
+This program utilizes the benchmark_app as the benchmark core logic. So the performance result measured by this program must be consistent with the one measured by the benchmark_app.  
+Also, the command line parameters and their meaning are compatible with the benchmark_app.  
 
 ### Requirements  
 - OpenVINO 2022.1 or higher  
@@ -23,7 +23,7 @@ python -m pip install -r requirements.txt
 ```sh
 python auto_benchmark_app.py -m resnet.xml -niter 100 -nthreads %1,2,4,8 -nstreams %1,2 -d %CPU,GPU -cdir cache
 ```
-With this command line, `-nthreads` has 4 options (1,2,4,8), `-nstreams` has 2 options (1,2), and `-d` option has 2 options (CPU,GPU). In total, 16 (4x2x2) benchmark will be performed.  
+With this command line, `-nthreads` has 4 options (1,2,4,8), `-nstreams` has 2 options (1,2), and `-d` option has 2 options (CPU,GPU). As the result, 16 (4x2x2) benchmarks will be performed in total.  
 
 ### Parameter options  
 You can specify variable parameters by adding following prefix to the parameters.  
@@ -31,7 +31,7 @@ You can specify variable parameters by adding following prefix to the parameters
 |---|---|---|
 |$|range|$1,8,2 == range(1,8,2) => [1,3,5,7]. All range() compatible expressions are possible. e.g. $1,5 or $5,1,-1|
 |%|list|%CPU,GPU => [\'CPU\', \'GPU\'], %1,2,4,8 => [1,2,4,8]|
-|@|ir-models|@models == IR models in the \'`./models\`' dir => [\'resnet.xml\', \'googlenet.xml\', ...]. This option will search the '.xml' files in the specified directory recursively.|
+|@|ir-models|@models == IR models in the \'`./models\`' dir => [\'resnet.xml\', \'googlenet.xml\', ...]. This option will recursively search the '.xml' files in the specified directory.|
 
 ### Examples of command line  
 `python auto_benchmark_app.py -cdir cache -m resnet.xml -nthreads $1,6,2 -nstreams %1,2,4,8 -d %CPU,GPU`  
