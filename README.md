@@ -31,7 +31,7 @@ You can specify variable parameters by adding following prefix to the parameters
 |---|---|---|
 |$|range|`$1,8,2` == `range(1,8,2)` => `[1,3,5,7]`<br>All `range()` compatible expressions are possible. e.g. `$1,5` or `$5,1,-1`|
 |%|list|`%CPU,GPU` => `['CPU', 'GPU']`, `%1,2,4,8` => `[1,2,4,8]`|
-|@|ir-models|`@models` == IR models in the \'`./models\`' dir => `['resnet.xml', 'googlenet.xml', ...]`<br>This option will recursively search the '.xml' files in the specified directory.|
+|@|ir-models|`@models` == IR models in the \'`./models`' dir => `['resnet.xml', 'googlenet.xml', ...]`<br>This option will recursively search the '.xml' files in the specified directory.|
 
 ### Examples of command line  
 `python auto_benchmark_app.py -cdir cache -m resnet.xml -nthreads $1,6,2 -nstreams %1,2,4,8 -d %CPU,GPU`  
