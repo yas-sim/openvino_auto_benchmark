@@ -4,6 +4,9 @@
 This program allows the users to specify variable parameters in the OpenVINO benchmark_app, and run benchmark with all combinations of the given parameters automatically.  
 The program will generate the report file in the CSV format with coded date and time file name ('`result_DDmm-HHMMSS.csv`'). You can analyze or visualize the benchmark result with MS Excel or same kind of spread sheet applications.  
 
+**The program is just a kind of front-end for the OpenVINO official benchmark_app.**  
+This program is utilizing the benchmark_app as the benchmark core logic. So the performance result measured by this progam must be consistent with the one measured by the benchmark_app.  
+Also, the command line parameters and its meaning are totally compatible with the benchmark_app.  
 
 ### Requirements  
 - OpenVINO 2022.1 or higher  
