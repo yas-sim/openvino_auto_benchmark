@@ -1,0 +1,5 @@
+psutil
+py-cpuinfo
+openvino==2022.1.0
+openvino-dev==2022.1.0
+#openvino-dev[tensorflow2,onnx,pytorch,caffe,kaldi]==2022.1.0
