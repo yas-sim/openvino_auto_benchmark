@@ -23,7 +23,7 @@ python -m pip install -r requirements.txt
 ```sh
 python auto_benchmark_app.py -m resnet.xml -niter 100 -nthreads %1,2,4,8 -nstreams %1,2 -d %CPU,GPU -cdir cache
 ```
-With this command line, `-nthreads` has 4 options (1,2,4,8), `-nstreams` has 2 options (1,2), and `-d` option has 2 options (CPU,GPU). In total, 16 (4*2*2) benchmark will be performed.  
+With this command line, `-nthreads` has 4 options (1,2,4,8), `-nstreams` has 2 options (1,2), and `-d` option has 2 options (CPU,GPU). In total, 16 (4x2x2) benchmark will be performed.  
 
 ### Parameter options  
 You can specify variable parameters by adding following prefix to the parameters.  
@@ -31,7 +31,7 @@ You can specify variable parameters by adding following prefix to the parameters
 |---|---|---|
 |$|range|$1,8,2 == range(1,8,2) => [1,3,5,7]. All range() compatible expressions are possible. e.g. $1,5 or $5,1,-1|
 |%|list|%CPU,GPU => [\'CPU\', \'GPU\'], %1,2,4,8 => [1,2,4,8]|
-|@|ir-models|@models == IR models in the \'./models\' dir => [\'resnet.xml\', \'googlenet.xml\', ...]. This option will search the '.xml' files in the specified directory recursively.|
+|@|ir-models|@models == IR models in the \'`./models\`' dir => [\'resnet.xml\', \'googlenet.xml\', ...]. This option will search the '.xml' files in the specified directory recursively.|
 
 ### Examples of command line  
 `python auto_benchmark_app.py -cdir cache -m resnet.xml -nthreads $1,6,2 -nstreams %1,2,4,8 -d %CPU,GPU`  
