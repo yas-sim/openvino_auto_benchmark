@@ -19,7 +19,7 @@ python -m pip install --upgrade pip setuptools
 python -m pip install -r requirements.txt
 ```
 
-2. Run the auto benchmark  
+2. Run the auto benchmark (command line example)  
 ```sh
 python auto_benchmark_app.py -m resnet.xml -niter 100 -nthreads %1,2,4,8 -nstreams %1,2 -d %CPU,GPU -cdir cache
 ```
@@ -35,7 +35,10 @@ You can specify variable parameters by adding following prefix to the parameters
 
 ### Examples of command line  
 `python auto_benchmark_app.py -cdir cache -m resnet.xml -nthreads $1,6,2 -nstreams %1,2,4,8 -d %CPU,GPU`  
+- Run benchmark with `-nthreads` = [1,3,5], `-nstreams`=[1,2,4,8], `-d`=['CPU','GPU']. Total 24 combinations.  
+
 `python auto_benchmark_app.py -m @models -niter 100 -nthreads %1,2,4,8 -nstreams %1,2 -d CPU -cdir cache`
+- Run benchmark with `-m`=[all .xml files in `models` directory], `-nthreads` = [1,2,4,8], `-nstreams`=[1,2].  
 
 ### Example of a result file  
 The last 4 items in each line are the performance data in the order of 'count', 'duration (ms)', 'latency AVG (ms)', and 'throughput (fps)'.  
