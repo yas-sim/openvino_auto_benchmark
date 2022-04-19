@@ -6,12 +6,15 @@ import re
 import os
 import datetime
 import platform
+import itertools
 
 import cpuinfo
 import psutil
 
 import openvino
 from openvino.tools.benchmark.main import main as benchmark_app
+
+dry_run = False
 
 def help():
     app_name = sys.argv[0]
@@ -48,6 +51,7 @@ def find_result(filename, item):
 
 
 def main():
+    global dry_run
     if len(sys.argv)<2:
         help()
         return 0
@@ -70,7 +74,8 @@ def main():
             # search IR models
             ir_search_root_dir = arg[1:]
             if os.path.isdir(ir_search_root_dir):
-                models = search_ir_models(ir_search_root_dir)         
+                models = search_ir_models(ir_search_root_dir)
+                print(models)
             else:
                 print('The directory {} is not existing.'.format(ir_search_root_dir))
                 return -1
@@ -81,12 +86,8 @@ def main():
             argstr += ' '+arg
     print(argstr)
 
-    combinations = 1
-    num_params = []
-    for param in params:
-        num_params.append(len(param))
-        combinations *= len(param)
-    print('Total number of parameter combinations:', combinations)
+    combinations = tuple(itertools.product(*params, repeat=1))
+    print('Total number of parameter combinations:', len(combinations))
 
     tmplog='tmplog.txt'
     now = datetime.datetime.now()
@@ -97,18 +98,16 @@ def main():
         print('#OS:', platform.platform(), file=log)
         print('#OpenVINO:', openvino.runtime.get_version(), file=log)
         print('#Last 4 items in the lines : test count, duration (ms), latency AVG (ms), and throughput (fps)')
-        for i in range(combinations):
-            idx = i
-            param_list = []
-            for j in range(len(params)):
-                param_idx = idx % num_params[j]
-                idx = (idx-param_idx) // num_params[j]
-                param_list.append(params[j][param_idx])
-            cmd_str = argstr.format(*param_list)
+        for combination in combinations:
+            cmd_str = argstr.format(*combination)
 
             argv = cmd_str.split(' ')
             print(*argv, sep=',', end='', file=log)
             print(',', end='', file=log)
+
+            if dry_run == True:
+                continue
+
             sys.argv = argv
             with open(tmplog, 'wt') as htmplog:
                 sys.stdout = htmplog            # redirect output
